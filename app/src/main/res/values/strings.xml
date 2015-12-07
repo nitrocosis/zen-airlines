@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Zen Airlines</string>
+    <string name="passenger_or_employee">Are you a passenger or an employee?</string>
+    <string name="passenger_options">Passenger Options</string>
+    <string name="employee_options">Employee Options</string>
+    <string name="passenger">Passenger</string>
+    <string name="employee">Employee</string>
+    <string name="options">What would you like to do?</string>
+    <string name="create_customer_account">Create Customer Account</string>
+    <string name="book_flight">Book a Flight</string>
+    <string name="lookup_customer_id">Lookup Customer Id</string>
+    <string name="lookup_flight_info">Lookup Flight Info</string>
+    <string name="lookup_employee_id">Lookup Employee Id</string>
+    <string name="check_schedule">Check Schedule</string>
 </resources>

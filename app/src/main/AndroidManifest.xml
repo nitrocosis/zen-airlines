@@ -8,13 +8,55 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".PassengerOptionsActivity"
+            android:label="@string/passenger_options"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".EmployeeOptionsActivity"
+            android:label="@string/employee_options"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".CreateCustomerAccountActivity"
+            android:label="@string/create_customer_account"
+            android:parentActivityName=".PassengerOptionsActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".BookFlightActivity"
+            android:label="@string/book_flight"
+            android:parentActivityName=".PassengerOptionsActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".LookupCustomerIdActivity"
+            android:label="@string/lookup_customer_id"
+            android:parentActivityName=".PassengerOptionsActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".LookupFlightActivity"
+            android:label="@string/lookup_flight_info"
+            android:parentActivityName=".PassengerOptionsActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".CheckEmployeeScheduleActivity"
+            android:label="@string/check_schedule"
+            android:parentActivityName=".EmployeeOptionsActivity"
+            android:screenOrientation="sensorPortrait" />
+        <activity
+            android:name=".LookupEmployeeIdActivity"
+            android:label="@string/lookup_employee_id"
+            android:parentActivityName=".EmployeeOptionsActivity"
+            android:screenOrientation="sensorPortrait" />
     </application>
 
 </manifest>
