@@ -1,7 +1,6 @@
 package com.srgiovine.zenairlines;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,6 +10,8 @@ import android.view.View;
  */
 public class CreateCustomerAccountActivity extends AppCompatActivity {
 
+    public static final String RESULT_CUSTOMER_ID = "cutomer_id";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,11 +19,10 @@ public class CreateCustomerAccountActivity extends AppCompatActivity {
     }
 
     public void onCreateCustomerAccountButtonClicked(View view) {
-        // TODO Replace with real implementation
-        new AlertDialog.Builder(this)
-                .setMessage("Your customer id is " + 1)
-                .setPositiveButton("Got it!", null)
-                .show();
+        Intent data = new Intent();
+        data.putExtra(RESULT_CUSTOMER_ID, "1");
+        setResult(RESULT_OK, data);
+        finish();
     }
 
 }
