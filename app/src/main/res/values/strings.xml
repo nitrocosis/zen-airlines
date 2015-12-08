@@ -12,4 +12,17 @@
     <string name="lookup_flight_info">Lookup Flight Info</string>
     <string name="lookup_employee_id">Lookup Employee Id</string>
     <string name="check_schedule">Check Schedule</string>
+
+    <string name="identity">Identity</string>
+    <string name="contact_info">Contact Info</string>
+    <string name="address">Address</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="ssn">SSN</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="email">Email</string>
+    <string name="street_address">Street Address</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="zip">Zip</string>
 </resources>
