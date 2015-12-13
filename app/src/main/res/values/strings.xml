@@ -23,6 +23,17 @@
     <string name="email">Email</string>
     <string name="street_address">Street Address</string>
     <string name="city">City</string>
-    <string name="state">State</string>
     <string name="zip">Zip</string>
+
+    <string name="departure">Departure</string>
+    <string name="arrival">Arrival</string>
+    <string name="seating">Seating</string>
+    <string name="cost">Cost</string>
+
+    <string name="ssn_or_email">SSN or email</string>
+    <string name="flight_number">Flight number</string>
+    <string name="lookup_by_flight_number">Enter flight number for flight description</string>
+    <string name="lookup_by_ssn_or_email">Enter SSN or email to get your customer ID</string>
+
+    <string name="aircraft">Aircraft</string>
 </resources>

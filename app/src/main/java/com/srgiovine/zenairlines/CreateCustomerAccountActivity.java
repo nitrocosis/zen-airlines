@@ -10,7 +10,7 @@ import android.view.View;
  */
 public class CreateCustomerAccountActivity extends AppCompatActivity {
 
-    public static final String RESULT_CUSTOMER_ID = "cutomer_id";
+    public static final String RESULT_CUSTOMER_ID = "customer_id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

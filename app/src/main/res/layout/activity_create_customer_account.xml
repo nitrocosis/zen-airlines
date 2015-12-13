@@ -37,7 +37,6 @@
             android:inputType="textPersonName"
             android:maxLength="50" />
 
-
         <EditText
             android:id="@+id/ssn"
             android:layout_width="match_parent"
@@ -84,23 +83,26 @@
             android:inputType="textPostalAddress"
             android:maxLength="50" />
 
-
-        <EditText
-            android:id="@+id/city"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/city"
-            android:inputType="textCapWords"
-            android:maxLength="25" />
+            android:orientation="horizontal">
 
+            <EditText
+                android:id="@+id/city"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:hint="@string/city"
+                android:inputType="textCapWords"
+                android:maxLength="50" />
 
-        <EditText
-            android:id="@+id/state"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/state"
-            android:inputType="textCapCharacters"
-            android:maxLength="2" />
+            <com.srgiovine.zenairlines.widgets.StateSpinner
+                android:id="@+id/state"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
 
         <EditText
             android:id="@+id/zip"
