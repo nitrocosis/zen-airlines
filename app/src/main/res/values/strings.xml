@@ -32,8 +32,13 @@
 
     <string name="ssn_or_email">SSN or email</string>
     <string name="flight_number">Flight number</string>
+    <string name="employee_id">Employee ID</string>
+    <string name="lookup_by_employee_id">Enter employee ID to see schedule</string>
     <string name="lookup_by_flight_number">Enter flight number for flight description</string>
-    <string name="lookup_by_ssn_or_email">Enter SSN or email to get your customer ID</string>
+    <string name="lookup_customer_id_by_ssn_or_email">Enter SSN or email to get your customer ID</string>
+    <string name="lookup_employee_id_by_ssn_or_email">Enter SSN or email to get your employee ID</string>
 
     <string name="aircraft">Aircraft</string>
+    <string name="date">Date</string>
+    <string name="shift_length">Shift Length</string>
 </resources>
