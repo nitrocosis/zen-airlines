@@ -2,7 +2,6 @@ package com.srgiovine.zenairlines;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,7 +16,7 @@ import java.util.List;
 /**
  * Allows employees to check their schedules.
  */
-public class CheckEmployeeScheduleActivity extends AppCompatActivity {
+public class CheckEmployeeScheduleActivity extends ZenAirlinesActivity {
 
     private static final String[] SCHEDULES_LIST = {
             "1140,2015-12-09,2.15 Hrs",

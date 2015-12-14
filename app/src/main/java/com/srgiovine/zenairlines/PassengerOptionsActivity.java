@@ -1,11 +1,8 @@
 package com.srgiovine.zenairlines;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.TextView;
 
 /**
  * Provides passengers several options:
@@ -15,7 +12,7 @@ import android.widget.TextView;
  * 3. Look up their customer id
  * 4. Look up their flight information
  */
-public class PassengerOptionsActivity extends AppCompatActivity {
+public class PassengerOptionsActivity extends ZenAirlinesActivity {
 
     private static final int RC_CREATE_CUSTOMER_ACC = 101;
     private static final int RC_BOOK_FLIGHT = 102;
@@ -30,7 +27,7 @@ public class PassengerOptionsActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK) {
+        if (resultCode == RESULT_CANCELED) {
             return;
         }
 
@@ -38,8 +35,12 @@ public class PassengerOptionsActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case RC_CREATE_CUSTOMER_ACC:
-                String customerId = data.getStringExtra(CreateCustomerAccountActivity.RESULT_CUSTOMER_ID);
-                message = "Customer ID: " + customerId;
+                if (resultCode == RESULT_FAILED) {
+                    message = "Failed to create new account";
+                } else {
+                    long customerId = data.getLongExtra(CreateCustomerAccountActivity.RESULT_CUSTOMER_ID, -1l);
+                    message = "Customer ID: " + customerId;
+                }
                 break;
 
             case RC_BOOK_FLIGHT:
@@ -51,15 +52,7 @@ public class PassengerOptionsActivity extends AppCompatActivity {
                 break;
         }
 
-        TextView messageView = (TextView) getLayoutInflater().inflate(R.layout.text_view_dialog, null, false);
-        messageView.setText(message);
-
-        new AlertDialog.Builder(this)
-                .setTitle("Success")
-                .setIcon(android.R.drawable.ic_menu_info_details)
-                .setView(messageView)
-                .setPositiveButton("Got it!", null)
-                .show();
+        showAlertDialog(resultCode == RESULT_FAILED ? "Failed" : "Success", message);
     }
 
     public void onCreateAccountButtonClicked(View view) {

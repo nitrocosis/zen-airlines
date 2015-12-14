@@ -1,9 +1,7 @@
 package com.srgiovine.zenairlines;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -14,7 +12,7 @@ import com.srgiovine.zenairlines.widgets.StateSpinner;
 /**
  * Allows passengers to look up their flight information.
  */
-public class LookupFlightActivity extends AppCompatActivity {
+public class LookupFlightActivity extends ZenAirlinesActivity {
 
     private EditText flightNumber;
     private EditText departureCity;
@@ -90,7 +88,7 @@ public class LookupFlightActivity extends AppCompatActivity {
         departureTime.setCurrentMinute(0);
         arrivalTime.setCurrentHour(11);
         arrivalTime.setCurrentMinute(0);
-        
+
         vin.setText("VIN: " + "1D3HW28K76S591323");
         model.setText("Model: " + "BOEING 757-300 (75Y)");
         crewCapacity.setText("Crew Capacity: " + "8");

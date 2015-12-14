@@ -2,13 +2,12 @@ package com.srgiovine.zenairlines;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 /**
  * Allows passengers to book a flight.
  */
-public class BookFlightActivity extends AppCompatActivity {
+public class BookFlightActivity extends ZenAirlinesActivity {
 
     public static final String RESULT_TICKET_NUMBER = "ticket_number";
     public static final String RESULT_FLIGHT_NUMBER = "flight_number";

@@ -2,7 +2,6 @@ package com.srgiovine.zenairlines;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 /**
@@ -11,7 +10,7 @@ import android.view.View;
  * 1. Check their schedule
  * 2. Look up their employee id
  */
-public class EmployeeOptionsActivity extends AppCompatActivity {
+public class EmployeeOptionsActivity extends ZenAirlinesActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
