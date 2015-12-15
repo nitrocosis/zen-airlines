@@ -4,8 +4,11 @@ import com.srgiovine.zenairlines.model.Aircraft;
 import com.srgiovine.zenairlines.model.Billing;
 import com.srgiovine.zenairlines.model.Customer;
 import com.srgiovine.zenairlines.model.Employee;
+import com.srgiovine.zenairlines.model.EmployeeSchedule;
 import com.srgiovine.zenairlines.model.FlightDescription;
 import com.srgiovine.zenairlines.model.Seating;
+
+import java.util.List;
 
 /**
  * Provides read and write access to the Zen Airlines database.
@@ -19,6 +22,8 @@ public interface ZenDB {
     void selectCustomerAsync(String ssnOrEmail, Callback<Customer> callback);
 
     void selectEmployeeAsync(String ssnOrEmail, Callback<Employee> callback);
+
+    void selectEmployeeSchedulesAsync(String employeeId, Callback<List<EmployeeSchedule>> callback);
 
     void selectAircraft(String flightNumber, Callback<Aircraft> callback);
 

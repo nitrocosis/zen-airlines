@@ -14,7 +14,7 @@ public final class Employee {
     public final String state;
     public final String zip;
 
-    public Employee(long id, String firstName, String lastName, String ssn, String jobDescription,
+    private Employee(long id, String firstName, String lastName, String ssn, String jobDescription,
                     String phoneNumber, String email, String address, String city, String state, String zip) {
         this.id = id;
         this.firstName = firstName;

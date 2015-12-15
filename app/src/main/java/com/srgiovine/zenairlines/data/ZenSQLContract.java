@@ -10,20 +10,20 @@ public final class ZenSQLContract {
     private ZenSQLContract() {
     }
 
-    public static abstract class Customer implements BaseColumns {
-        public static final String TABLE_NAME = "CUSTOMER";
-        public static final String CUSTOMER_ID = _ID;
-        public static final String FIRST_NAME = "FirstName";
-        public static final String LAST_NAME = "LastName";
-        public static final String SSN = "SSN";
-        public static final String PHONE_NUMBER = "PhoneNumber";
-        public static final String EMAIL = "Email";
-        public static final String ADDRESS = "Address";
-        public static final String CITY = "City";
-        public static final String STATE = "State";
-        public static final String ZIP = "Zip";
+    static abstract class Customer implements BaseColumns {
+        static final String TABLE_NAME = "CUSTOMER";
+        static final String CUSTOMER_ID = _ID;
+        static final String FIRST_NAME = "FirstName";
+        static final String LAST_NAME = "LastName";
+        static final String SSN = "SSN";
+        static final String PHONE_NUMBER = "PhoneNumber";
+        static final String EMAIL = "Email";
+        static final String ADDRESS = "Address";
+        static final String CITY = "City";
+        static final String STATE = "State";
+        static final String ZIP = "Zip";
 
-        public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
+        static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
                 CUSTOMER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 FIRST_NAME + " TEXT NOT NULL," +
                 LAST_NAME + " TEXT NOT NULL," +
@@ -38,9 +38,9 @@ public final class ZenSQLContract {
                 " UNIQUE (" + EMAIL + ")" +
                 " )";
 
-        public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
+        static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
-        public static final String INITIAL_INSERT = "INSERT INTO " + TABLE_NAME +
+        static final String INITIAL_INSERT = "INSERT INTO " + TABLE_NAME +
                 "(" + FIRST_NAME + ", " + LAST_NAME + ", " + SSN + ", " + PHONE_NUMBER + ", " + EMAIL +
                 ", " + ADDRESS + ", " + CITY + ", " + STATE + ", " + ZIP + ")" +
                 " VALUES " +
@@ -67,21 +67,21 @@ public final class ZenSQLContract {
     }
 
 
-    public static abstract class Employee implements BaseColumns {
-        public static final String TABLE_NAME = "EMPLOYEE";
-        public static final String EMPLOYEE_ID = _ID;
-        public static final String FIRST_NAME = "FirstName";
-        public static final String LAST_NAME = "LastName";
-        public static final String SSN = "SSN";
-        public static final String JOB_DESCRIPTION = "JobDescription";
-        public static final String PHONE_NUMBER = "PhoneNumber";
-        public static final String EMAIL = "Email";
-        public static final String ADDRESS = "Address";
-        public static final String CITY = "City";
-        public static final String STATE = "State";
-        public static final String ZIP = "Zip";
+    static abstract class Employee implements BaseColumns {
+        static final String TABLE_NAME = "EMPLOYEE";
+        static final String EMPLOYEE_ID = _ID;
+        static final String FIRST_NAME = "FirstName";
+        static final String LAST_NAME = "LastName";
+        static final String SSN = "SSN";
+        static final String JOB_DESCRIPTION = "JobDescription";
+        static final String PHONE_NUMBER = "PhoneNumber";
+        static final String EMAIL = "Email";
+        static final String ADDRESS = "Address";
+        static final String CITY = "City";
+        static final String STATE = "State";
+        static final String ZIP = "Zip";
 
-        public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
+        static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
                 EMPLOYEE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 FIRST_NAME + " TEXT NOT NULL," +
                 LAST_NAME + " TEXT NOT NULL," +
@@ -97,9 +97,9 @@ public final class ZenSQLContract {
                 " UNIQUE (" + EMAIL + ")" +
                 " )";
 
-        public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
+        static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
-        public static final String INITIAL_INSERT = "INSERT INTO " + TABLE_NAME +
+        static final String INITIAL_INSERT = "INSERT INTO " + TABLE_NAME +
                 "(" + FIRST_NAME + ", " + LAST_NAME + ", " + SSN + ", " + JOB_DESCRIPTION +
                 ", " + PHONE_NUMBER + ", " + EMAIL + ", " + ADDRESS + ", " + CITY +
                 ", " + STATE + ", " + ZIP + ")" +
@@ -126,20 +126,20 @@ public final class ZenSQLContract {
                 "('Franklin','Rogers', '664534273','First Attendent', '9776559481','frogers@gmail.com','11.536 12th Street East','Manchester Township','NJ', '18759')";
     }
 
-    public static abstract class FlightDescription implements BaseColumns {
+    static abstract class FlightDescription implements BaseColumns {
 
-        public static final String TABLE_NAME = "FLIGHT_DESCRIPTION";
-        public static final String FLIGHT_NUMBER = _ID;
-        public static final String DEPARTURE = "Departure";
-        public static final String DEPARTURE_CITY = "DepartCity";
-        public static final String DEPARTURE_STATE = "DepartState";
-        public static final String DEPARTURE_TIME = "TimeOfDeparture";
-        public static final String ARRIVAL = "Arrival";
-        public static final String ARRIVAL_CITY = "ArrCity";
-        public static final String ARRIVAL_STATE = "ArrState";
-        public static final String ARRIVAL_TIME = "TimeOfArrival";
+        static final String TABLE_NAME = "FLIGHT_DESCRIPTION";
+        static final String FLIGHT_NUMBER = _ID;
+        static final String DEPARTURE = "Departure";
+        static final String DEPARTURE_CITY = "DepartCity";
+        static final String DEPARTURE_STATE = "DepartState";
+        static final String DEPARTURE_TIME = "TimeOfDeparture";
+        static final String ARRIVAL = "Arrival";
+        static final String ARRIVAL_CITY = "ArrCity";
+        static final String ARRIVAL_STATE = "ArrState";
+        static final String ARRIVAL_TIME = "TimeOfArrival";
 
-        public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
+        static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
                 FLIGHT_NUMBER + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 DEPARTURE + " TEXT NOT NULL," +
                 DEPARTURE_CITY + " TEXT NOT NULL," +
@@ -151,9 +151,9 @@ public final class ZenSQLContract {
                 ARRIVAL_TIME + " TEXT NOT NULL" +
                 " )";
 
-        public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
+        static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
-        public static final String INITIAL_INSERT = "INSERT INTO " + TABLE_NAME +
+        static final String INITIAL_INSERT = "INSERT INTO " + TABLE_NAME +
                 "(" + DEPARTURE + ", " + DEPARTURE_CITY + ", " + DEPARTURE_STATE + ", " + DEPARTURE_TIME +
                 ", " + ARRIVAL + ", " + ARRIVAL_CITY + ", " + ARRIVAL_STATE + ", " + ARRIVAL_TIME + ")" +
                 " VALUES " +
@@ -183,15 +183,15 @@ public final class ZenSQLContract {
                 "('AUS', 'Austin', 'TX', '21:30', 'MIA', 'Miami', 'FL', '23:45')";
     }
 
-    public static abstract class EmployeeSchedule implements BaseColumns {
-        public static final String TABLE_NAME = "EMPLOYEE_SCHEDULE";
-        public static final String SCHEDULE_ID = _ID;
-        public static final String EMPLOYEE_ID = "EmployeeID";
-        public static final String FLIGHT_NUMBER = "FlightNumber";
-        public static final String DATE = "Date";
-        public static final String SHIFT_LENGTH = "ShiftLength";
+    static abstract class EmployeeSchedule implements BaseColumns {
+        static final String TABLE_NAME = "EMPLOYEE_SCHEDULE";
+        static final String SCHEDULE_ID = _ID;
+        static final String EMPLOYEE_ID = "EmployeeID";
+        static final String FLIGHT_NUMBER = "FlightNumber";
+        static final String DATE = "Date";
+        static final String SHIFT_LENGTH = "ShiftLength";
 
-        public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
+        static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
                 SCHEDULE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 EMPLOYEE_ID + " INTEGER NOT NULL," +
                 FLIGHT_NUMBER + " INTEGER NOT NULL," +
@@ -201,17 +201,17 @@ public final class ZenSQLContract {
                 " FOREIGN KEY (" + FLIGHT_NUMBER + ") REFERENCES " + FlightDescription.TABLE_NAME + "(" + FlightDescription.FLIGHT_NUMBER + ")" +
                 " )";
 
-        public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
+        static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
-        public static final String INITIAL_INSERT = "INSERT INTO " + TABLE_NAME +
+        static final String INITIAL_INSERT = "INSERT INTO " + TABLE_NAME +
                 "(" + EMPLOYEE_ID + ", " + FLIGHT_NUMBER + ", " + DATE + ", " + SHIFT_LENGTH + ")" +
                 " VALUES " +
-                "(1, 1, '2015-12-09', '2 Hrs')," +
-                "(3, 1, '2015-12-09', '2 Hrs')," +
-                "(2, 1, '2015-12-09', '2 Hrs')," +
+                "(1, 1, '2015-12-09', '2.5 Hrs')," +
+                "(3, 1, '2015-12-09', '3 Hrs')," +
+                "(2, 1, '2015-12-09', '1.5 Hrs')," +
                 "(6, 1, '2015-12-09', '2 Hrs')," +
-                "(1, 1, '2015-12-09', '2 Hrs')," +
-                "(3, 1, '2015-12-09', '2 Hrs')," +
+                "(1, 1, '2015-12-09', '4 Hrs')," +
+                "(3, 1, '2015-12-09', '3 Hrs')," +
                 "(2, 1, '2015-12-09', '2 Hrs')," +
                 "(6, 1, '2015-12-09', '2 Hrs')," +
                 "(4, 2, '2015-12-09', '3 Hrs')," +
@@ -243,17 +243,41 @@ public final class ZenSQLContract {
                 "(17, 7, '2015-12-10', '2.5 Hrs')," +
                 "(20, 7, '2015-12-10', '2.5 Hrs')," +
                 "(18, 7, '2015-12-10', '2.5 Hrs')," +
-                "(19, 7, '2015-12-10', '2.5 Hrs')";
+                "(19, 7, '2015-12-10', '2.5 Hrs')," +
+                "(1, 1, '2015-12-11', '2.5 Hrs')," +
+                "(3, 1, '2015-12-11', '3 Hrs')," +
+                "(2, 1, '2015-12-11', '1.5 Hrs')," +
+                "(6, 1, '2015-12-11', '2 Hrs')," +
+                "(1, 1, '2015-12-11', '4 Hrs')," +
+                "(3, 1, '2015-12-11', '3 Hrs')," +
+                "(2, 1, '2015-12-11', '2 Hrs')," +
+                "(6, 1, '2015-12-11', '2 Hrs')," +
+                "(4, 2, '2015-12-11', '3 Hrs')," +
+                "(5, 2, '2015-12-11', '3 Hrs')," +
+                "(10, 2, '2015-12-11', '3 Hrs')," +
+                "(13, 2, '2015-12-11', '3 Hrs')," +
+                "(4, 3, '2015-12-11', '1.5 Hrs')," +
+                "(5, 3, '2015-12-11', '1.5 Hrs')," +
+                "(10, 3, '2015-12-11', '1.5 Hrs')," +
+                "(13, 3, '2015-12-11', '1.5 Hrs')," +
+                "(7, 4, '2015-12-11', '2.15 Hrs')," +
+                "(8, 4, '2015-12-11', '2.15 Hrs')," +
+                "(9, 4, '2015-12-11', '2.15 Hrs')," +
+                "(11, 4, '2015-12-11', '2.15 Hrs')," +
+                "(12, 4, '2015-12-11', '2.15 Hrs')," +
+                "(15, 4, '2015-12-11', '2.15 Hrs')," +
+                "(14, 4, '2015-12-11', '2.15 Hrs')," +
+                "(16, 4, '2015-12-11', '2.15 Hrs')";
     }
 
-    public static abstract class Billing implements BaseColumns {
-        public static final String TABLE_NAME = "BILLING";
-        public static final String TRANSACTION_NUMBER = _ID;
-        public static final String FLIGHT_NUMBER = "FlightNumber";
-        public static final String CUSTOMER_ID = "CustomerID";
-        public static final String TICKET_NUMBER = "TicketNumber";
+    static abstract class Billing implements BaseColumns {
+        static final String TABLE_NAME = "BILLING";
+        static final String TRANSACTION_NUMBER = _ID;
+        static final String FLIGHT_NUMBER = "FlightNumber";
+        static final String CUSTOMER_ID = "CustomerID";
+        static final String TICKET_NUMBER = "TicketNumber";
 
-        public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
+        static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
                 TRANSACTION_NUMBER + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
                 FLIGHT_NUMBER + " INTEGER NOT NULL," +
                 CUSTOMER_ID + " INTEGER NOT NULL," +
@@ -262,9 +286,9 @@ public final class ZenSQLContract {
                 " FOREIGN KEY (" + CUSTOMER_ID + ") REFERENCES " + Customer.TABLE_NAME + "(" + Customer.CUSTOMER_ID + ")" +
                 " )";
 
-        public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
+        static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
-        public static final String INITIAL_INSERT = "INSERT INTO " + TABLE_NAME +
+        static final String INITIAL_INSERT = "INSERT INTO " + TABLE_NAME +
                 "(" + FLIGHT_NUMBER + ", " + CUSTOMER_ID + ", " + TICKET_NUMBER + ")" +
                 " VALUES " +
                 "(1, 1, 2016)," +
@@ -289,18 +313,18 @@ public final class ZenSQLContract {
                 "(6, 20, 2035)";
     }
 
-    public static abstract class Aircraft implements BaseColumns {
-        public static final String TABLE_NAME = "AIRCRAFT";
-        public static final String VIN = _ID;
-        public static final String FLIGHT_NUMBER = "FlightNumber";
-        public static final String MODEL = "Model";
-        public static final String CREW_CAPACITY = "CrewCapacity";
-        public static final String FUEL_RANGE = "FuelRange";
-        public static final String FIRST_CLASS = "FirstClass";
-        public static final String BUSINESS_CLASS = "BusinessClass";
-        public static final String ECONOMY_CLASS = "EconomyClass";
+    static abstract class Aircraft implements BaseColumns {
+        static final String TABLE_NAME = "AIRCRAFT";
+        static final String VIN = _ID;
+        static final String FLIGHT_NUMBER = "FlightNumber";
+        static final String MODEL = "Model";
+        static final String CREW_CAPACITY = "CrewCapacity";
+        static final String FUEL_RANGE = "FuelRange";
+        static final String FIRST_CLASS = "FirstClass";
+        static final String BUSINESS_CLASS = "BusinessClass";
+        static final String ECONOMY_CLASS = "EconomyClass";
 
-        public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
+        static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
                 VIN + " TEXT PRIMARY KEY NOT NULL," +
                 FLIGHT_NUMBER + " INTEGER NOT NULL," +
                 MODEL + " TEXT NOT NULL," +
@@ -312,9 +336,9 @@ public final class ZenSQLContract {
                 " FOREIGN KEY (" + FLIGHT_NUMBER + ") REFERENCES " + FlightDescription.TABLE_NAME + "(" + FlightDescription.FLIGHT_NUMBER + ")" +
                 " )";
 
-        public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
+        static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
-        public static final String INITIAL_INSERT = "INSERT INTO " + TABLE_NAME +
+        static final String INITIAL_INSERT = "INSERT INTO " + TABLE_NAME +
                 "(" + VIN + ", " + FLIGHT_NUMBER + ", " + MODEL + ", " + CREW_CAPACITY +
                 "," + FUEL_RANGE + ", " + FIRST_CLASS + ", " + BUSINESS_CLASS + ", " + ECONOMY_CLASS + ")" +
                 " VALUES " +
@@ -344,15 +368,15 @@ public final class ZenSQLContract {
                 "('JHMEH6264RS068014', 24, 'EMBRAER ERJ145', 4, '1,496mi', 0, 0, 50)";
     }
 
-    public static abstract class Seating implements BaseColumns {
-        public static final String TABLE_NAME = "SEATING";
-        public static final String CUSTOMER_ID = "CustomerId";
-        public static final String FLIGHT_NUMBER = "FlightNumber";
-        public static final String SEAT_NUMBER = "SeatNumber";
-        public static final String COST = "Cost";
-        public static final String CLASS = "SeatClass";
+    static abstract class Seating implements BaseColumns {
+        static final String TABLE_NAME = "SEATING";
+        static final String CUSTOMER_ID = "CustomerId";
+        static final String FLIGHT_NUMBER = "FlightNumber";
+        static final String SEAT_NUMBER = "SeatNumber";
+        static final String COST = "Cost";
+        static final String CLASS = "SeatClass";
 
-        public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
+        static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
                 CUSTOMER_ID + " INTEGER NOT NULL," +
                 FLIGHT_NUMBER + " INTEGER NOT NULL," +
                 SEAT_NUMBER + " TEXT NOT NULL," +
@@ -363,9 +387,9 @@ public final class ZenSQLContract {
                 " UNIQUE (" + FLIGHT_NUMBER + ", " + SEAT_NUMBER + ")" +
                 " )";
 
-        public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
+        static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
-        public static final String INITIAL_INSERT = "INSERT INTO " + TABLE_NAME +
+        static final String INITIAL_INSERT = "INSERT INTO " + TABLE_NAME +
                 "(" + CUSTOMER_ID + ", " + FLIGHT_NUMBER + ", " + SEAT_NUMBER +
                 "," + COST + ", " + CLASS + ")" +
                 " VALUES " +

@@ -11,8 +11,12 @@ import com.srgiovine.zenairlines.model.Aircraft;
 import com.srgiovine.zenairlines.model.Billing;
 import com.srgiovine.zenairlines.model.Customer;
 import com.srgiovine.zenairlines.model.Employee;
+import com.srgiovine.zenairlines.model.EmployeeSchedule;
 import com.srgiovine.zenairlines.model.FlightDescription;
 import com.srgiovine.zenairlines.model.Seating;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Provides an implementation of {@link ZenDB}.
@@ -22,11 +26,8 @@ public class ZenSQL extends SQLiteOpenHelper implements ZenDB {
     private static final String DB_NAME = "ZenAirlines.db";
     private static final int DB_VERSION = 1;
 
-    private final Context context;
-
     public ZenSQL(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-        this.context = context;
     }
 
     @Override
@@ -73,8 +74,8 @@ public class ZenSQL extends SQLiteOpenHelper implements ZenDB {
     }
 
     @Override
-    public void insertCustomerAsync(final Customer customer, final Callback<Long> callback) {
-        getWritableDatabaseAsync(new GetDBCallback<Long>(callback) {
+    public void insertCustomerAsync(final Customer customer, Callback<Long> callback) {
+        doDBWriteOperationInBackground(new DBOperation<Long>(callback) {
             @Override
             public Long doInBackground(SQLiteDatabase sqLiteDatabase) {
                 ContentValues contentValues = ZenSQLContentValues.getCustomerContentValues(customer);
@@ -88,8 +89,8 @@ public class ZenSQL extends SQLiteOpenHelper implements ZenDB {
     }
 
     @Override
-    public void insertSeatingAsync(final Seating seating, final Callback<Long> callback) {
-        getWritableDatabaseAsync(new GetDBCallback<Long>(callback) {
+    public void insertSeatingAsync(final Seating seating, Callback<Long> callback) {
+        doDBWriteOperationInBackground(new DBOperation<Long>(callback) {
             @Override
             public Long doInBackground(SQLiteDatabase sqLiteDatabase) {
                 ContentValues contentValues = ZenSQLContentValues.getSeatingContentValues(seating);
@@ -103,8 +104,8 @@ public class ZenSQL extends SQLiteOpenHelper implements ZenDB {
     }
 
     @Override
-    public void bookFlightAsync(final long flightNumber, final long customerId, final Callback<Billing> callback) {
-        getWritableDatabaseAsync(new GetDBCallback<Billing>(callback) {
+    public void bookFlightAsync(final long flightNumber, final long customerId, Callback<Billing> callback) {
+        doDBWriteOperationInBackground(new DBOperation<Billing>(callback) {
             @Override
             public Billing doInBackground(SQLiteDatabase sqLiteDatabase) {
                 // get largest ticket number
@@ -143,8 +144,8 @@ public class ZenSQL extends SQLiteOpenHelper implements ZenDB {
     }
 
     @Override
-    public void selectCustomerAsync(final String ssnOrEmail, final Callback<Customer> callback) {
-        getReadableDatabaseAsync(new GetDBCallback<Customer>(callback) {
+    public void selectCustomerAsync(final String ssnOrEmail, Callback<Customer> callback) {
+        doDBReadOperationInBackground(new DBOperation<Customer>(callback) {
             @Override
             public Customer doInBackground(SQLiteDatabase sqLiteDatabase) {
                 Cursor cursor = sqLiteDatabase.query(ZenSQLContract.Customer.TABLE_NAME, null,
@@ -161,8 +162,8 @@ public class ZenSQL extends SQLiteOpenHelper implements ZenDB {
     }
 
     @Override
-    public void selectEmployeeAsync(final String ssnOrEmail, final Callback<Employee> callback) {
-        getReadableDatabaseAsync(new GetDBCallback<Employee>(callback) {
+    public void selectEmployeeAsync(final String ssnOrEmail, Callback<Employee> callback) {
+        doDBReadOperationInBackground(new DBOperation<Employee>(callback) {
             @Override
             public Employee doInBackground(SQLiteDatabase sqLiteDatabase) {
                 Cursor cursor = sqLiteDatabase.query(ZenSQLContract.Employee.TABLE_NAME, null,
@@ -179,8 +180,30 @@ public class ZenSQL extends SQLiteOpenHelper implements ZenDB {
     }
 
     @Override
-    public void selectAircraft(final String flightNumber, final Callback<Aircraft> callback) {
-        getReadableDatabaseAsync(new GetDBCallback<Aircraft>(callback) {
+    public void selectEmployeeSchedulesAsync(final String employeeId, Callback<List<EmployeeSchedule>> callback) {
+        doDBReadOperationInBackground(new DBOperation<List<EmployeeSchedule>>(callback) {
+            @Override
+            protected List<EmployeeSchedule> doInBackground(SQLiteDatabase sqLiteDatabase) {
+                Cursor cursor = sqLiteDatabase.query(ZenSQLContract.EmployeeSchedule.TABLE_NAME, null,
+                        ZenSQLContract.EmployeeSchedule.EMPLOYEE_ID + " = ?",
+                        new String[]{employeeId},
+                        null, null, null);
+                if (cursor.moveToFirst()) {
+                    List<EmployeeSchedule> employeeSchedules = new ArrayList<>();
+                    employeeSchedules.add(ZenSQLContentValues.getEmployeeSchedule(cursor));
+                    while (cursor.moveToNext()) {
+                        employeeSchedules.add(ZenSQLContentValues.getEmployeeSchedule(cursor));
+                    }
+                    return employeeSchedules;
+                }
+                return null;
+            }
+        });
+    }
+
+    @Override
+    public void selectAircraft(final String flightNumber, Callback<Aircraft> callback) {
+        doDBReadOperationInBackground(new DBOperation<Aircraft>(callback) {
             @Override
             public Aircraft doInBackground(SQLiteDatabase sqLiteDatabase) {
                 Cursor cursor = sqLiteDatabase.query(ZenSQLContract.Aircraft.TABLE_NAME, null,
@@ -199,8 +222,8 @@ public class ZenSQL extends SQLiteOpenHelper implements ZenDB {
     public void selectFlightAsync(final String departureCity, final String departureState,
                                   final String departureTime, final String arrivalCity,
                                   final String arrivalState, final String arrivalTime,
-                                  final Callback<FlightDescription> callback) {
-        getReadableDatabaseAsync(new GetDBCallback<FlightDescription>(callback) {
+                                  Callback<FlightDescription> callback) {
+        doDBReadOperationInBackground(new DBOperation<FlightDescription>(callback) {
             @Override
             public FlightDescription doInBackground(SQLiteDatabase sqLiteDatabase) {
                 Cursor cursor = sqLiteDatabase.query(ZenSQLContract.FlightDescription.TABLE_NAME, null,
@@ -224,8 +247,8 @@ public class ZenSQL extends SQLiteOpenHelper implements ZenDB {
     }
 
     @Override
-    public void selectFlightAsync(final String flightNumber, final Callback<FlightDescription> callback) {
-        getReadableDatabaseAsync(new GetDBCallback<FlightDescription>(callback) {
+    public void selectFlightAsync(final String flightNumber, Callback<FlightDescription> callback) {
+        doDBReadOperationInBackground(new DBOperation<FlightDescription>(callback) {
             @Override
             public FlightDescription doInBackground(SQLiteDatabase sqLiteDatabase) {
                 Cursor cursor = sqLiteDatabase.query(ZenSQLContract.FlightDescription.TABLE_NAME, null,
@@ -240,43 +263,43 @@ public class ZenSQL extends SQLiteOpenHelper implements ZenDB {
         });
     }
 
-    private <C> void getWritableDatabaseAsync(final GetDBCallback<C> getDBCallback) {
+    private <C> void doDBWriteOperationInBackground(final DBOperation<C> dbOperation) {
         new AsyncTask<Void, Void, C>() {
 
             @Override
             protected C doInBackground(Void... params) {
-                return getDBCallback.doInBackground(getWritableDatabase());
+                return dbOperation.doInBackground(getWritableDatabase());
             }
 
             @Override
             protected void onPostExecute(C c) {
                 super.onPostExecute(c);
-                getDBCallback.onPostExecute(c);
+                dbOperation.onPostExecute(c);
             }
         }.execute();
     }
 
-    private <C> void getReadableDatabaseAsync(final GetDBCallback<C> getDBCallback) {
+    private <C> void doDBReadOperationInBackground(final DBOperation<C> dbOperation) {
         new AsyncTask<Void, Void, C>() {
 
             @Override
             protected C doInBackground(Void... params) {
-                return getDBCallback.doInBackground(getReadableDatabase());
+                return dbOperation.doInBackground(getReadableDatabase());
             }
 
             @Override
             protected void onPostExecute(C c) {
                 super.onPostExecute(c);
-                getDBCallback.onPostExecute(c);
+                dbOperation.onPostExecute(c);
             }
         }.execute();
     }
 
-    private static abstract class GetDBCallback<C> {
+    private static abstract class DBOperation<C> {
 
         private final Callback<C> callback;
 
-        private GetDBCallback(Callback callback) {
+        private DBOperation(Callback<C> callback) {
             this.callback = callback;
         }
 

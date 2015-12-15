@@ -7,6 +7,7 @@ import com.srgiovine.zenairlines.model.Aircraft;
 import com.srgiovine.zenairlines.model.Billing;
 import com.srgiovine.zenairlines.model.Customer;
 import com.srgiovine.zenairlines.model.Employee;
+import com.srgiovine.zenairlines.model.EmployeeSchedule;
 import com.srgiovine.zenairlines.model.FlightDescription;
 import com.srgiovine.zenairlines.model.Seating;
 
@@ -44,6 +45,16 @@ final class ZenSQLContentValues {
                 .setState(cursor.getString(cursor.getColumnIndexOrThrow(ZenSQLContract.Employee.STATE)))
                 .setZip(cursor.getString(cursor.getColumnIndexOrThrow(ZenSQLContract.Employee.ZIP)))
                 .createEmployee();
+    }
+
+    static EmployeeSchedule getEmployeeSchedule(Cursor cursor) {
+        return new EmployeeSchedule.Builder()
+                .setScheduleId(cursor.getLong(cursor.getColumnIndexOrThrow(ZenSQLContract.EmployeeSchedule.SCHEDULE_ID)))
+                .setEmployeeId(cursor.getLong(cursor.getColumnIndexOrThrow(ZenSQLContract.EmployeeSchedule.EMPLOYEE_ID)))
+                .setFlightNumber(cursor.getLong(cursor.getColumnIndexOrThrow(ZenSQLContract.EmployeeSchedule.FLIGHT_NUMBER)))
+                .setDate(cursor.getString(cursor.getColumnIndexOrThrow(ZenSQLContract.EmployeeSchedule.DATE)))
+                .setShiftLength(cursor.getString(cursor.getColumnIndexOrThrow(ZenSQLContract.EmployeeSchedule.SHIFT_LENGTH)))
+                .createEmployeeSchedule();
     }
 
     static Aircraft getAircraft(Cursor cursor) {

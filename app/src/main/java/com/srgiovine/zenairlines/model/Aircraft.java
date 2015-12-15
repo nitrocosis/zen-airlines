@@ -11,7 +11,7 @@ public final class Aircraft {
     public final long businessClass;
     public final long economyClass;
 
-    public Aircraft(String vin, long flightNumber, String model, long crewCapacity, String fuelRange,
+    private Aircraft(String vin, long flightNumber, String model, long crewCapacity, String fuelRange,
                     long firstClass, long businessClass, long economyClass) {
         this.vin = vin;
         this.flightNumber = flightNumber;

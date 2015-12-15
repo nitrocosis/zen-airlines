@@ -9,19 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.srgiovine.zenairlines.data.ZenDB;
+import com.srgiovine.zenairlines.model.EmployeeSchedule;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
  * Allows employees to check their schedules.
  */
 public class CheckEmployeeScheduleActivity extends ZenAirlinesActivity {
-
-    private static final String[] SCHEDULES_LIST = {
-            "1140,2015-12-09,2.15 Hrs",
-            "1160,2015-12-10,2 Hrs",
-    };
 
     private SchedulesAdapter schedulesAdapter;
 
@@ -39,14 +36,29 @@ public class CheckEmployeeScheduleActivity extends ZenAirlinesActivity {
     }
 
     public void onCheckScheduleButtonClicked(View view) {
-        schedulesAdapter.updateSchedulesList(Arrays.asList(SCHEDULES_LIST));
+        if (!validateEditTexts(R.id.employee_id)) {
+            return;
+        }
+
+        getZenDB().selectEmployeeSchedulesAsync(getEditTextValue(R.id.employee_id, String.class),
+                new ZenDB.Callback<List<EmployeeSchedule>>() {
+                    @Override
+                    public void success(List<EmployeeSchedule> employeeSchedules) {
+                        schedulesAdapter.updateSchedulesList(employeeSchedules);
+                    }
+
+                    @Override
+                    public void failed() {
+                        showAlertDialog("Failed", "Employee schedule not found!");
+                    }
+                });
     }
 
     private static class SchedulesAdapter extends RecyclerView.Adapter<SchedulesViewHolder> {
 
-        private final List<String> schedulesList = new ArrayList<>();
+        private final List<EmployeeSchedule> schedulesList = new ArrayList<>();
 
-        private void updateSchedulesList(List<String> updatedSchedulesList) {
+        private void updateSchedulesList(List<EmployeeSchedule> updatedSchedulesList) {
             schedulesList.clear();
             schedulesList.addAll(updatedSchedulesList);
             notifyDataSetChanged();
@@ -61,13 +73,13 @@ public class CheckEmployeeScheduleActivity extends ZenAirlinesActivity {
 
         @Override
         public void onBindViewHolder(SchedulesViewHolder holder, int position) {
-            String[] scheduleItem = schedulesList.get(position).split(",");
+            EmployeeSchedule scheduleItem = schedulesList.get(position);
 
             String color = position % 2 == 0 ? "#ffffff" : "#efefef";
             holder.itemView.setBackgroundColor(Color.parseColor(color));
-            holder.flightNumber.setText(scheduleItem[0]);
-            holder.date.setText(scheduleItem[1]);
-            holder.shiftLength.setText(scheduleItem[2]);
+            holder.flightNumber.setText(String.valueOf(scheduleItem.flightNumber));
+            holder.date.setText(scheduleItem.date);
+            holder.shiftLength.setText(scheduleItem.shiftLength);
         }
 
         @Override
