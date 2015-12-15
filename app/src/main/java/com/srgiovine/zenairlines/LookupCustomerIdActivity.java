@@ -3,7 +3,7 @@ package com.srgiovine.zenairlines;
 import android.os.Bundle;
 import android.view.View;
 
-import com.srgiovine.zenairlines.data.ZenSQL;
+import com.srgiovine.zenairlines.data.ZenDB;
 import com.srgiovine.zenairlines.model.Customer;
 
 /**
@@ -22,8 +22,8 @@ public class LookupCustomerIdActivity extends ZenAirlinesActivity {
             return;
         }
 
-        getZenSQL().selectCustomerAsync(getEditTextValue(R.id.ssn_or_email, String.class),
-                new ZenSQL.Callback<Customer>() {
+        getZenDB().selectCustomerAsync(getEditTextValue(R.id.ssn_or_email, String.class),
+                new ZenDB.Callback<Customer>() {
                     @Override
                     public void success(Customer customer) {
                         showAlertDialog("Success", "Customer ID: " + customer.id);

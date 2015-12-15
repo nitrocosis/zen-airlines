@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.srgiovine.zenairlines.data.ZenSQL;
+import com.srgiovine.zenairlines.data.ZenDB;
 import com.srgiovine.zenairlines.model.Customer;
 
 /**
@@ -26,7 +26,7 @@ public class CreateCustomerAccountActivity extends ZenAirlinesActivity {
             return;
         }
 
-        getZenSQL().insertCustomerAsync(createCustomerFromViews(), new ZenSQL.Callback<Long>() {
+        getZenDB().insertCustomerAsync(createCustomerFromViews(), new ZenDB.Callback<Long>() {
             @Override
             public void success(Long newCustomerId) {
                 Intent data = new Intent();

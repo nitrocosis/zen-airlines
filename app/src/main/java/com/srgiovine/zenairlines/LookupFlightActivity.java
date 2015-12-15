@@ -7,7 +7,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.srgiovine.zenairlines.data.ZenSQL;
+import com.srgiovine.zenairlines.data.ZenDB;
 import com.srgiovine.zenairlines.model.Aircraft;
 import com.srgiovine.zenairlines.model.FlightDescription;
 import com.srgiovine.zenairlines.widgets.StateSpinner;
@@ -79,7 +79,7 @@ public class LookupFlightActivity extends ZenAirlinesActivity {
 
         final String flightNumber = getEditTextValue(R.id.flight_number, String.class);
 
-        final ZenSQL.Callback<Aircraft> selectAircraftCallback = new ZenSQL.Callback<Aircraft>() {
+        final ZenDB.Callback<Aircraft> selectAircraftCallback = new ZenDB.Callback<Aircraft>() {
             @Override
             public void success(Aircraft aircraft) {
                 vin.setText("VIN: " + aircraft.vin);
@@ -98,7 +98,7 @@ public class LookupFlightActivity extends ZenAirlinesActivity {
             }
         };
 
-        getZenSQL().selectFlightAsync(flightNumber, new ZenSQL.Callback<FlightDescription>() {
+        getZenDB().selectFlightAsync(flightNumber, new ZenDB.Callback<FlightDescription>() {
             @Override
             public void success(FlightDescription flightDescription) {
                 departureCity.setText(flightDescription.departureCity);
@@ -119,7 +119,7 @@ public class LookupFlightActivity extends ZenAirlinesActivity {
                 departure.setText(flightDescription.departure);
                 arrival.setText(flightDescription.arrival);
 
-                getZenSQL().selectAircraft(flightNumber, selectAircraftCallback);
+                getZenDB().selectAircraft(flightNumber, selectAircraftCallback);
             }
 
             @Override

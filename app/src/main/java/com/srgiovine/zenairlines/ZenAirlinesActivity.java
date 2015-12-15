@@ -9,10 +9,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.srgiovine.zenairlines.data.ZenSQL;
+import com.srgiovine.zenairlines.data.ZenDB;
 
 /**
- * Base activity that provides subclasses simpler access to {@link ZenSQL}. This also provides
+ * Base activity that provides subclasses simpler access to {@link ZenDB}. This also provides
  * other convenience methods.
  */
 public class ZenAirlinesActivity extends AppCompatActivity {
@@ -31,8 +31,8 @@ public class ZenAirlinesActivity extends AppCompatActivity {
                 .show();
     }
 
-    protected ZenSQL getZenSQL() {
-        return ((ZenAirlinesApplication) getApplication()).getZenSQL();
+    protected ZenDB getZenDB() {
+        return ((ZenAirlinesApplication) getApplication()).getZenDB();
     }
 
     @SuppressWarnings("unchecked")

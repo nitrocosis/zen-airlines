@@ -2,23 +2,23 @@ package com.srgiovine.zenairlines;
 
 import android.app.Application;
 
+import com.srgiovine.zenairlines.data.ZenDB;
 import com.srgiovine.zenairlines.data.ZenSQL;
-import com.srgiovine.zenairlines.data.ZenSQLImpl;
 
 /**
- * The application instance. Provides access to {@link ZenSQLImpl}.
+ * The application instance. Provides access to {@link ZenSQL}.
  */
 public class ZenAirlinesApplication extends Application {
 
-    private ZenSQLImpl zenSQL;
+    private ZenDB zenDB;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        zenSQL = new ZenSQLImpl(this);
+        zenDB = new ZenSQL(this);
     }
 
-    public ZenSQL getZenSQL() {
-        return zenSQL;
+    public ZenDB getZenDB() {
+        return zenDB;
     }
 }

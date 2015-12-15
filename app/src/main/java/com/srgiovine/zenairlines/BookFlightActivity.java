@@ -7,7 +7,7 @@ import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.srgiovine.zenairlines.data.ZenSQL;
+import com.srgiovine.zenairlines.data.ZenDB;
 import com.srgiovine.zenairlines.model.Billing;
 import com.srgiovine.zenairlines.model.Customer;
 import com.srgiovine.zenairlines.model.FlightDescription;
@@ -46,7 +46,7 @@ public class BookFlightActivity extends ZenAirlinesActivity {
             return;
         }
 
-        final ZenSQL.Callback<Billing> bookFlightCallback = new ZenSQL.Callback<Billing>() {
+        final ZenDB.Callback<Billing> bookFlightCallback = new ZenDB.Callback<Billing>() {
             @Override
             public void success(Billing billing) {
                 Intent data = new Intent();
@@ -62,10 +62,10 @@ public class BookFlightActivity extends ZenAirlinesActivity {
             }
         };
 
-        final ZenSQL.Callback<Long> insertSeatingCallback = new ZenSQL.Callback<Long>() {
+        final ZenDB.Callback<Long> insertSeatingCallback = new ZenDB.Callback<Long>() {
             @Override
             public void success(Long item) {
-                getZenSQL().bookFlightAsync(flightNumber, customerId, bookFlightCallback);
+                getZenDB().bookFlightAsync(flightNumber, customerId, bookFlightCallback);
             }
 
             @Override
@@ -74,11 +74,11 @@ public class BookFlightActivity extends ZenAirlinesActivity {
             }
         };
 
-        final ZenSQL.Callback<FlightDescription> selectFlightCallback = new ZenSQL.Callback<FlightDescription>() {
+        final ZenDB.Callback<FlightDescription> selectFlightCallback = new ZenDB.Callback<FlightDescription>() {
             @Override
             public void success(FlightDescription flightDescription) {
                 flightNumber = flightDescription.flightNumber;
-                getZenSQL().insertSeatingAsync(getSeatingFromViews(), insertSeatingCallback);
+                getZenDB().insertSeatingAsync(getSeatingFromViews(), insertSeatingCallback);
             }
 
             @Override
@@ -87,11 +87,11 @@ public class BookFlightActivity extends ZenAirlinesActivity {
             }
         };
 
-        getZenSQL().selectCustomerAsync(getEditTextValue(R.id.ssn_or_email, String.class), new ZenSQL.Callback<Customer>() {
+        getZenDB().selectCustomerAsync(getEditTextValue(R.id.ssn_or_email, String.class), new ZenDB.Callback<Customer>() {
             @Override
             public void success(Customer customer) {
                 customerId = customer.id;
-                getZenSQL().selectFlightAsync(
+                getZenDB().selectFlightAsync(
                         getEditTextValue(R.id.departure_city, String.class),
                         getSpinnerValue(R.id.departure_state, String.class),
                         getTimePickerValue(R.id.departure_time),
