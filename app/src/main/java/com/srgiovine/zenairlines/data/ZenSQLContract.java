@@ -33,7 +33,9 @@ public final class ZenSQLContract {
                 ADDRESS + " TEXT NOT NULL," +
                 CITY + " TEXT NOT NULL," +
                 STATE + " TEXT NOT NULL," +
-                ZIP + " TEXT NOT NULL" +
+                ZIP + " TEXT NOT NULL," +
+                " UNIQUE (" + SSN + ")," +
+                " UNIQUE (" + EMAIL + ")" +
                 " )";
 
         public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
@@ -90,7 +92,9 @@ public final class ZenSQLContract {
                 ADDRESS + " TEXT NOT NULL," +
                 CITY + " TEXT NOT NULL," +
                 STATE + " TEXT NOT NULL," +
-                ZIP + " TEXT NOT NULL" +
+                ZIP + " TEXT NOT NULL," +
+                " UNIQUE (" + SSN + ")," +
+                " UNIQUE (" + EMAIL + ")" +
                 " )";
 
         public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
@@ -245,7 +249,7 @@ public final class ZenSQLContract {
     public static abstract class Billing implements BaseColumns {
         public static final String TABLE_NAME = "BILLING";
         public static final String TRANSACTION_NUMBER = _ID;
-        public static final String FLIGHT_NUMBER = "FLightNumber";
+        public static final String FLIGHT_NUMBER = "FlightNumber";
         public static final String CUSTOMER_ID = "CustomerID";
         public static final String TICKET_NUMBER = "TicketNumber";
 
@@ -314,30 +318,30 @@ public final class ZenSQLContract {
                 "(" + VIN + ", " + FLIGHT_NUMBER + ", " + MODEL + ", " + CREW_CAPACITY +
                 "," + FUEL_RANGE + ", " + FIRST_CLASS + ", " + BUSINESS_CLASS + ", " + ECONOMY_CLASS + ")" +
                 " VALUES " +
-                "('ZDM1XBMV4CB527053', 1000, 'Boeing 747', 10, '7,365mi', 20, 140, 216)," +
-                "('1D3HW28K76S591323', 1010, 'BOEING 757-300 (75Y)', 8, '3,228mi', 24, 32, 178)," +
-                "('1B4GP44R1TB425064', 1020, 'BOEING 777-200ER', 8, '8,542mi', 37, 36,218)," +
-                "('1FTSW31S9YEE58983', 1030, 'Boeing 747', 10, '7,365mi', 20, 140, 216)," +
-                "('ZDM1RB8S52B055115', 1040, 'Boeing 717', 4, '1,510mi', 10, 0, 100)," +
-                "('1G1ZF5E73CF319847', 1050, 'BOEING 757-200 (757)', 6, '3,393mi', 24, 20, 136)," +
-                "('1FABP40E8HF117217', 1060, 'BOEING 767-300 (76Q/P)',6, '3,515mi', 30, 28, 203)," +
-                "('WVWGV7AJ8AW050840', 1070, 'Boeing 717', 4, '1,510mi', 12, 20, 78)," +
-                "('2G4WE567751361617', 1080, 'AIRBUS A330-200 (332)', 10, '6,353mi', 34, 32, 168)," +
-                "('3C6UR5FL9DG606007', 1090, 'EMBRAER E170', 4, '1,800mi', 9, 12, 48)," +
-                "('YV1LS5720V2401212', 1100, 'Boeing 737-800', 6, '4,500mi', 20, 25, 100)," +
-                "('WD2YD642335097898', 1110, 'MCDONNELL DOUGLAS MD-90',5,'1,992mi',16, 15, 129)," +
-                "('2HSFHAST2SC008183', 1120, 'EMBRAER E175-SHUTTLE AMERICA', 4, '1,800mi', 12, 12, 52)," +
-                "('1GBK6P1B5LV110036', 1130, 'EMBRAER ERJ145', 4, '1,496mi', 0, 0, 50)," +
-                "('1G2AS8713EL277537', 1140, 'AIRBUS A330-300 (333)', 8, '5,343mi', 34, 40, 219)," +
-                "('1GC4KXBG3AFA42937', 1150, 'BOEING 757-200 (75M)', 4, '2,854mi', 22, 18, 141)," +
-                "('1FTEX2769VNC82351', 1160, 'BOEING 757-200 (75H)', 6, '4,344mi', 20, 29, 150)," +
-                "('1GYUKKEF9AR102120', 1170, 'BOEING 757-200 (75S)', 4, '4,705mi', 16, 44, 108)," +
-                "('JM3ER2C56B0312302', 1180, 'BOEING 757-200 (75X)', 4, '3,393mi', 26, 26, 132)," +
-                "('1XKAD29X6VR657915', 1190, 'BOEING 737-800 (738)', 4, '2,930mi', 16, 18, 126)," +
-                "('19UUA9F23CA815059', 1200, 'BOEING 747-400 (744)', 10, '7,365mi', 48, 42, 286)," +
-                "('2WLPCD2H5YK975701', 1210, 'BOEING 757-200 (75S)', 4, '4,705mi', 16, 44, 108)," +
-                "('1HTSAZPM2PH494671', 1220, 'MCDONNELL DOUGLAS MD-90',5,'1,992mi',16, 15, 129)," +
-                "('JHMEH6264RS068014', 1230, 'EMBRAER ERJ145', 4, '1,496mi', 0, 0, 50)";
+                "('ZDM1XBMV4CB527053', 1, 'Boeing 747', 10, '7,365mi', 20, 140, 216)," +
+                "('1D3HW28K76S591323', 2, 'BOEING 757-300 (75Y)', 8, '3,228mi', 24, 32, 178)," +
+                "('1B4GP44R1TB425064', 3, 'BOEING 777-200ER', 8, '8,542mi', 37, 36,218)," +
+                "('1FTSW31S9YEE58983', 4, 'Boeing 747', 10, '7,365mi', 20, 140, 216)," +
+                "('ZDM1RB8S52B055115', 5, 'Boeing 717', 4, '1,510mi', 10, 0, 100)," +
+                "('1G1ZF5E73CF319847', 6, 'BOEING 757-200 (757)', 6, '3,393mi', 24, 20, 136)," +
+                "('1FABP40E8HF117217', 7, 'BOEING 767-300 (76Q/P)',6, '3,515mi', 30, 28, 203)," +
+                "('WVWGV7AJ8AW050840', 8, 'Boeing 717', 4, '1,510mi', 12, 20, 78)," +
+                "('2G4WE567751361617', 9, 'AIRBUS A330-200 (332)', 10, '6,353mi', 34, 32, 168)," +
+                "('3C6UR5FL9DG606007', 10, 'EMBRAER E170', 4, '1,800mi', 9, 12, 48)," +
+                "('YV1LS5720V2401212', 11, 'Boeing 737-800', 6, '4,500mi', 20, 25, 100)," +
+                "('WD2YD642335097898', 12, 'MCDONNELL DOUGLAS MD-90',5,'1,992mi',16, 15, 129)," +
+                "('2HSFHAST2SC008183', 13, 'EMBRAER E175-SHUTTLE AMERICA', 4, '1,800mi', 12, 12, 52)," +
+                "('1GBK6P1B5LV110036', 14, 'EMBRAER ERJ145', 4, '1,496mi', 0, 0, 50)," +
+                "('1G2AS8713EL277537', 15, 'AIRBUS A330-300 (333)', 8, '5,343mi', 34, 40, 219)," +
+                "('1GC4KXBG3AFA42937', 16, 'BOEING 757-200 (75M)', 4, '2,854mi', 22, 18, 141)," +
+                "('1FTEX2769VNC82351', 17, 'BOEING 757-200 (75H)', 6, '4,344mi', 20, 29, 150)," +
+                "('1GYUKKEF9AR102120', 18, 'BOEING 757-200 (75S)', 4, '4,705mi', 16, 44, 108)," +
+                "('JM3ER2C56B0312302', 19, 'BOEING 757-200 (75X)', 4, '3,393mi', 26, 26, 132)," +
+                "('1XKAD29X6VR657915', 20, 'BOEING 737-800 (738)', 4, '2,930mi', 16, 18, 126)," +
+                "('19UUA9F23CA815059', 21, 'BOEING 747-400 (744)', 10, '7,365mi', 48, 42, 286)," +
+                "('2WLPCD2H5YK975701', 22, 'BOEING 757-200 (75S)', 4, '4,705mi', 16, 44, 108)," +
+                "('1HTSAZPM2PH494671', 23, 'MCDONNELL DOUGLAS MD-90',5,'1,992mi',16, 15, 129)," +
+                "('JHMEH6264RS068014', 24, 'EMBRAER ERJ145', 4, '1,496mi', 0, 0, 50)";
     }
 
     public static abstract class Seating implements BaseColumns {
@@ -349,41 +353,42 @@ public final class ZenSQLContract {
         public static final String CLASS = "SeatClass";
 
         public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (" +
-                CUSTOMER_ID + " INTEGER PRIMARY KEY NOT NULL," +
+                CUSTOMER_ID + " INTEGER NOT NULL," +
                 FLIGHT_NUMBER + " INTEGER NOT NULL," +
                 SEAT_NUMBER + " TEXT NOT NULL," +
                 COST + " INTEGER NOT NULL," +
                 CLASS + " TEXT NOT NULL," +
                 " FOREIGN KEY (" + CUSTOMER_ID + ") REFERENCES " + Customer.TABLE_NAME + "(" + Customer.CUSTOMER_ID + ")," +
-                " FOREIGN KEY (" + FLIGHT_NUMBER + ") REFERENCES " + FlightDescription.TABLE_NAME + "(" + FlightDescription.FLIGHT_NUMBER + ")" +
+                " FOREIGN KEY (" + FLIGHT_NUMBER + ") REFERENCES " + FlightDescription.TABLE_NAME + "(" + FlightDescription.FLIGHT_NUMBER + ")," +
+                " UNIQUE (" + FLIGHT_NUMBER + ", " + SEAT_NUMBER + ")" +
                 " )";
 
         public static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
-        
+
         public static final String INITIAL_INSERT = "INSERT INTO " + TABLE_NAME +
                 "(" + CUSTOMER_ID + ", " + FLIGHT_NUMBER + ", " + SEAT_NUMBER +
                 "," + COST + ", " + CLASS + ")" +
                 " VALUES " +
-                "(1,1,'10A',200, 'Business')," +
-                "(2,2,'20A',150, 'First')," +
-                "(3,3,'30A',250, 'First')," +
-                "(4,4,'41B',120, 'Economy')," +
-                "(5,5,'11A',200, 'Business')," +
-                "(6,6,'10A',100, 'Business')," +
-                "(7,7,'22C',120, 'Economy')," +
-                "(8,1,'22C',120, 'Economy')," +
-                "(9,2,'23C',130, 'Economy')," +
-                "(10,3,'14C',120, 'Economy')," +
-                "(11,4,'14B',240, 'First')," +
-                "(12,5,'34D',250, 'First')," +
-                "(13,6,'11B',120, 'Economy')," +
-                "(14,7,'16D',240, 'First')," +
-                "(15,1,'14D',240, 'First')," +
-                "(16,2,'18B',90, 'Economy')," +
-                "(17,3,'10B',110, 'Economy')," +
-                "(18,4,'60B',240, 'First')," +
-                "(19,5,'70C',320, 'First')," +
-                "(20,6,'80D',140, 'Economy')";
+                "(1,1,'10A',240, 'First')," +
+                "(2,2,'20A',210, 'First')," +
+                "(3,3,'30A',150, 'Business')," +
+                "(4,4,'41B',160, 'Business')," +
+                "(5,5,'11B',260, 'First')," +
+                "(6,6,'10A',240, 'First')," +
+                "(7,7,'22C',230, 'First')," +
+                "(8,1,'22C',230, 'First')," +
+                "(9,2,'23D',210, 'First')," +
+                "(10,3,'50A',130, 'Business')," +
+                "(11,4,'50B',150, 'Business')," +
+                "(12,5,'41B',160, 'Business')," +
+                "(13,6,'42C',160, 'Business')," +
+                "(14,7,'20A',210, 'First')," +
+                "(15,1,'21B',230, 'First')," +
+                "(16,2,'22C',230, 'First')," +
+                "(17,3,'23D',210, 'First')," +
+                "(18,4,'60A',120, 'Economy')," +
+                "(19,5,'70A',120, 'Economy')," +
+                "(20,6,'80A',120, 'Economy')";
     }
 
 }

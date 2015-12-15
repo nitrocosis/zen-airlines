@@ -14,6 +14,14 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
+        <EditText
+            android:id="@+id/ssn_or_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/ssn_or_email"
+            android:maxLength="50"
+            android:singleLine="true" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +41,8 @@
                 android:layout_weight="3"
                 android:hint="@string/city"
                 android:inputType="textCapWords"
-                android:maxLength="50" />
+                android:maxLength="50"
+                android:singleLine="true" />
 
             <com.srgiovine.zenairlines.widgets.StateSpinner
                 android:id="@+id/departure_state"
@@ -66,7 +75,8 @@
                 android:layout_weight="3"
                 android:hint="@string/city"
                 android:inputType="textCapWords"
-                android:maxLength="50" />
+                android:maxLength="50"
+                android:singleLine="true" />
 
             <com.srgiovine.zenairlines.widgets.StateSpinner
                 android:id="@+id/arrival_state"
@@ -87,18 +97,34 @@
             android:text="@string/seating"
             android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-        <com.srgiovine.zenairlines.widgets.SeatClassSpinner
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:text="@string/seat_number" />
+
+            <com.srgiovine.zenairlines.widgets.SeatNumberSpinner
+                android:id="@+id/seat_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <TextView
             android:id="@+id/seat_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <EditText
-            android:id="@+id/cost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/cost"
-            android:inputType="numberDecimal"
-            android:maxLength="3" />
+        <TextView
+            android:id="@+id/seat_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <Button
             android:layout_width="match_parent"

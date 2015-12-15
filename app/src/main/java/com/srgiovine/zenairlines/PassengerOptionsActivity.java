@@ -44,11 +44,9 @@ public class PassengerOptionsActivity extends ZenAirlinesActivity {
                 break;
 
             case RC_BOOK_FLIGHT:
-                String ticketNumber = data.getStringExtra(BookFlightActivity.RESULT_TICKET_NUMBER);
-                String flightNumber = data.getStringExtra(BookFlightActivity.RESULT_FLIGHT_NUMBER);
-                String seatNumber = data.getStringExtra(BookFlightActivity.RESULT_SEAT_NUMBER);
-                message = "\nTicket Number: " + ticketNumber + "\nFlight Number: " + flightNumber
-                        + "\nSeat Number: " + seatNumber;
+                long ticketNumber = data.getLongExtra(BookFlightActivity.RESULT_TICKET_NUMBER, -1l);
+                long flightNumber = data.getLongExtra(BookFlightActivity.RESULT_FLIGHT_NUMBER, -1l);
+                message = "\nTicket Number: " + ticketNumber + "\nFlight Number: " + flightNumber;
                 break;
         }
 

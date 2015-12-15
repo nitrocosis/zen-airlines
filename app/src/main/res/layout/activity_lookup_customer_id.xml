@@ -21,7 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/ssn_or_email"
-        android:maxLength="50" />
+        android:maxLength="50"
+        android:singleLine="true" />
 
     <Button
         android:layout_width="match_parent"

@@ -21,17 +21,22 @@ public class CreateCustomerAccountActivity extends ZenAirlinesActivity {
     }
 
     public void onCreateCustomerAccountButtonClicked(View view) {
-        getZenSQL().insertCustomerAsync(createCustomerFromViews(), new ZenSQL.InsertCallback() {
+        if (!validateEditTexts(R.id.first_name, R.id.last_name, R.id.ssn, R.id.phone_number,
+                R.id.email, R.id.street_address, R.id.city, R.id.zip)) {
+            return;
+        }
+
+        getZenSQL().insertCustomerAsync(createCustomerFromViews(), new ZenSQL.Callback<Long>() {
             @Override
-            public void insertSuccess(long newRowId) {
+            public void success(Long newCustomerId) {
                 Intent data = new Intent();
-                data.putExtra(RESULT_CUSTOMER_ID, newRowId);
+                data.putExtra(RESULT_CUSTOMER_ID, newCustomerId);
                 setResult(RESULT_OK, data);
                 finish();
             }
 
             @Override
-            public void insertFailed() {
+            public void failed() {
                 setResult(RESULT_FAILED);
                 finish();
             }

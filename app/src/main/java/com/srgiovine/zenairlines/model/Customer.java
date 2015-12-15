@@ -1,10 +1,8 @@
 package com.srgiovine.zenairlines.model;
 
-/**
- * Model for the Customer table.
- */
 public final class Customer {
 
+    public final long id;
     public final String firstName;
     public final String lastName;
     public final String ssn;
@@ -15,8 +13,9 @@ public final class Customer {
     public final String state;
     public final String zip;
 
-    public Customer(String firstName, String lastName, String ssn, String phoneNumber, String email,
-                    String address, String city, String state, String zip) {
+    private Customer(long id, String firstName, String lastName, String ssn, String phoneNumber,
+                    String email, String address, String city, String state, String zip) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.ssn = ssn;
@@ -30,6 +29,7 @@ public final class Customer {
 
     public static class Builder {
 
+        private long id;
         private String firstName;
         private String lastName;
         private String ssn;
@@ -39,6 +39,11 @@ public final class Customer {
         private String city;
         private String state;
         private String zip;
+
+        public Builder setId(long id) {
+            this.id = id;
+            return this;
+        }
 
         public Builder setFirstName(String firstName) {
             this.firstName = firstName;
@@ -86,7 +91,7 @@ public final class Customer {
         }
 
         public Customer createCustomer() {
-            return new Customer(firstName, lastName, ssn, phoneNumber, email, address, city, state, zip);
+            return new Customer(id, firstName, lastName, ssn, phoneNumber, email, address, city, state, zip);
         }
     }
 }

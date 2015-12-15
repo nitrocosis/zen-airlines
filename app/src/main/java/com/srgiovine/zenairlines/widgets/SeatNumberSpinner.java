@@ -7,13 +7,13 @@ import android.widget.Spinner;
 
 import com.srgiovine.zenairlines.R;
 
-public class SeatClassSpinner extends Spinner {
+public class SeatNumberSpinner extends Spinner {
 
-    public SeatClassSpinner(Context context, AttributeSet attrs) {
+    public SeatNumberSpinner(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         ArrayAdapter adapter = ArrayAdapter.createFromResource(context,
-                R.array.seat_class, android.R.layout.simple_spinner_item);
+                R.array.seat_numbers, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         setAdapter(adapter);
     }

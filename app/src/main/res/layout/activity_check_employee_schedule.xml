@@ -21,7 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/employee_id"
-        android:inputType="numberDecimal" />
+        android:inputType="numberDecimal"
+        android:singleLine="true" />
 
     <Button
         android:layout_width="match_parent"

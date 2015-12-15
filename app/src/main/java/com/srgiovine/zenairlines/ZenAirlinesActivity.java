@@ -3,9 +3,11 @@ package com.srgiovine.zenairlines;
 import android.app.AlertDialog;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.srgiovine.zenairlines.data.ZenSQL;
 
@@ -49,6 +51,26 @@ public class ZenAirlinesActivity extends AppCompatActivity {
             return (C) Integer.valueOf(value);
         }
         return (C) value;
+    }
+
+    protected String getTimePickerValue(@IdRes int timePickerId) {
+        TimePicker timePicker = (TimePicker) findViewById(timePickerId);
+        return String.format("%02d:%02d", timePicker.getCurrentHour(), timePicker.getCurrentMinute());
+    }
+
+    protected boolean validateEditTexts(@IdRes int... editTextIds) {
+        boolean isValid = true;
+        for (int editTextId : editTextIds) {
+            EditText editText = (EditText) findViewById(editTextId);
+            String editTextValue = editText.getText().toString();
+            if (TextUtils.isEmpty(editTextValue)) {
+                isValid = false;
+                editText.setError("This field is required");
+            } else {
+                editText.setError(null);
+            }
+        }
+        return isValid;
     }
 
 }

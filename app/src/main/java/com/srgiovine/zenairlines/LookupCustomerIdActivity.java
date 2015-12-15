@@ -1,9 +1,10 @@
 package com.srgiovine.zenairlines;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+
+import com.srgiovine.zenairlines.data.ZenSQL;
+import com.srgiovine.zenairlines.model.Customer;
 
 /**
  * Allows passengers to look up their customer id.
@@ -17,15 +18,22 @@ public class LookupCustomerIdActivity extends ZenAirlinesActivity {
     }
 
     public void onLookupCustomerIdButtonClicked(View view) {
-        TextView messageView = (TextView) getLayoutInflater().inflate(R.layout.text_view_dialog, null, false);
-        messageView.setText("Customer ID: " + "1");
+        if (!validateEditTexts(R.id.ssn_or_email)) {
+            return;
+        }
 
-        new AlertDialog.Builder(this)
-                .setTitle("Success")
-                .setView(messageView)
-                .setIcon(android.R.drawable.ic_menu_info_details)
-                .setPositiveButton("Got it!", null)
-                .show();
+        getZenSQL().selectCustomerAsync(getEditTextValue(R.id.ssn_or_email, String.class),
+                new ZenSQL.Callback<Customer>() {
+                    @Override
+                    public void success(Customer customer) {
+                        showAlertDialog("Success", "Customer ID: " + customer.id);
+                    }
+
+                    @Override
+                    public void failed() {
+                        showAlertDialog("Failed", "Failed to lookup customer id");
+                    }
+                });
     }
 
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="seat_numbers">
+        <item>10A</item>
+        <item>11B</item>
+        <item>12C</item>
+        <item>13D</item>
+        <item>20A</item>
+        <item>21B</item>
+        <item>22C</item>
+        <item>23D</item>
+        <item>30A</item>
+        <item>31B</item>
+        <item>32C</item>
+        <item>33D</item>
+        <item>40A</item>
+        <item>41B</item>
+        <item>42C</item>
+        <item>43D</item>
+        <item>50A</item>
+        <item>51B</item>
+        <item>52C</item>
+        <item>53D</item>
+        <item>60A</item>
+        <item>61B</item>
+        <item>62C</item>
+        <item>63D</item>
+        <item>70A</item>
+        <item>71B</item>
+        <item>72C</item>
+        <item>73D</item>
+        <item>80A</item>
+        <item>81B</item>
+        <item>82C</item>
+        <item>83D</item>
+        <item>90A</item>
+        <item>91B</item>
+        <item>92C</item>
+        <item>93D</item>
+    </string-array>
+
+</resources>

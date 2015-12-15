@@ -28,13 +28,13 @@
     <string name="departure">Departure</string>
     <string name="arrival">Arrival</string>
     <string name="seating">Seating</string>
-    <string name="cost">Cost</string>
 
     <string name="ssn_or_email">SSN or email</string>
     <string name="flight_number">Flight number</string>
+    <string name="seat_number">Seat number</string>
     <string name="employee_id">Employee ID</string>
     <string name="lookup_by_employee_id">Enter employee ID to see schedule</string>
-    <string name="lookup_by_flight_number">Enter flight number for flight description</string>
+    <string name="lookup_by_flight_number">Enter flight number for flight info</string>
     <string name="lookup_customer_id_by_ssn_or_email">Enter SSN or email to get your customer ID</string>
     <string name="lookup_employee_id_by_ssn_or_email">Enter SSN or email to get your employee ID</string>
 

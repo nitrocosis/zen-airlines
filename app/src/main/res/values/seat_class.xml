@@ -3,7 +3,40 @@
 
     <string-array name="seat_class">
         <item>First</item>
+        <item>First</item>
+        <item>First</item>
+        <item>First</item>
+        <item>First</item>
+        <item>First</item>
+        <item>First</item>
+        <item>First</item>
         <item>Business</item>
+        <item>Business</item>
+        <item>Business</item>
+        <item>Business</item>
+        <item>Business</item>
+        <item>Business</item>
+        <item>Business</item>
+        <item>Business</item>
+        <item>Business</item>
+        <item>Business</item>
+        <item>Business</item>
+        <item>Business</item>
+        <item>Economy</item>
+        <item>Economy</item>
+        <item>Economy</item>
+        <item>Economy</item>
+        <item>Economy</item>
+        <item>Economy</item>
+        <item>Economy</item>
+        <item>Economy</item>
+        <item>Economy</item>
+        <item>Economy</item>
+        <item>Economy</item>
+        <item>Economy</item>
+        <item>Economy</item>
+        <item>Economy</item>
+        <item>Economy</item>
         <item>Economy</item>
     </string-array>
 
