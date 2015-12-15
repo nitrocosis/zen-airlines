@@ -3,6 +3,7 @@ package com.srgiovine.zenairlines.data;
 import com.srgiovine.zenairlines.model.Aircraft;
 import com.srgiovine.zenairlines.model.Billing;
 import com.srgiovine.zenairlines.model.Customer;
+import com.srgiovine.zenairlines.model.Employee;
 import com.srgiovine.zenairlines.model.FlightDescription;
 import com.srgiovine.zenairlines.model.Seating;
 
@@ -16,6 +17,8 @@ public interface ZenSQL {
     void insertSeatingAsync(Seating seating, Callback<Long> callback);
 
     void selectCustomerAsync(String ssnOrEmail, Callback<Customer> callback);
+
+    void selectEmployeeAsync(String ssnOrEmail, Callback<Employee> callback);
 
     void selectAircraft(String flightNumber, Callback<Aircraft> callback);
 

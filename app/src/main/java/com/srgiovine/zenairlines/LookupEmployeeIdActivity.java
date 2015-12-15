@@ -1,9 +1,10 @@
 package com.srgiovine.zenairlines;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+
+import com.srgiovine.zenairlines.data.ZenSQL;
+import com.srgiovine.zenairlines.model.Employee;
 
 /**
  * Allows employees to look up their employee id.
@@ -17,15 +18,22 @@ public class LookupEmployeeIdActivity extends ZenAirlinesActivity {
     }
 
     public void onLookupEmployeeIdButtonClicked(View view) {
-        TextView messageView = (TextView) getLayoutInflater().inflate(R.layout.text_view_dialog, null, false);
-        messageView.setText("Employee ID: " + "1");
+        if (!validateEditTexts(R.id.ssn_or_email)) {
+            return;
+        }
 
-        new AlertDialog.Builder(this)
-                .setTitle("Success")
-                .setView(messageView)
-                .setIcon(android.R.drawable.ic_menu_info_details)
-                .setPositiveButton("Got it!", null)
-                .show();
+        getZenSQL().selectEmployeeAsync(getEditTextValue(R.id.ssn_or_email, String.class),
+                new ZenSQL.Callback<Employee>() {
+                    @Override
+                    public void success(Employee employee) {
+                        showAlertDialog("Success", "Employee ID: " + employee.id);
+                    }
+
+                    @Override
+                    public void failed() {
+                        showAlertDialog("Failed", "Failed to lookup employee id");
+                    }
+                });
     }
 
 }

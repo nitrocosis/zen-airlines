@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import com.srgiovine.zenairlines.model.Aircraft;
 import com.srgiovine.zenairlines.model.Billing;
 import com.srgiovine.zenairlines.model.Customer;
+import com.srgiovine.zenairlines.model.Employee;
 import com.srgiovine.zenairlines.model.FlightDescription;
 import com.srgiovine.zenairlines.model.Seating;
 
@@ -73,47 +74,44 @@ public class ZenSQLImpl extends SQLiteOpenHelper implements ZenSQL {
 
     @Override
     public void insertCustomerAsync(final Customer customer, final Callback<Long> callback) {
-        getWritableDatabaseAsync(new GetDBCallback() {
+        getWritableDatabaseAsync(new GetDBCallback<Long>(callback) {
             @Override
-            public void onObtainedSQLiteDatabase(SQLiteDatabase sqLiteDatabase) {
+            public Long doInBackground(SQLiteDatabase sqLiteDatabase) {
                 ContentValues contentValues = ZenSQLContentValues.getCustomerContentValues(customer);
                 long newCustomerId = sqLiteDatabase.insert(ZenSQLContract.Customer.TABLE_NAME, null, contentValues);
                 if (newCustomerId != -1l) {
-                    callback.success(newCustomerId);
-                } else {
-                    callback.failed();
+                    return newCustomerId;
                 }
+                return null;
             }
         });
     }
 
     @Override
     public void insertSeatingAsync(final Seating seating, final Callback<Long> callback) {
-        getWritableDatabaseAsync(new GetDBCallback() {
+        getWritableDatabaseAsync(new GetDBCallback<Long>(callback) {
             @Override
-            public void onObtainedSQLiteDatabase(SQLiteDatabase sqLiteDatabase) {
+            public Long doInBackground(SQLiteDatabase sqLiteDatabase) {
                 ContentValues contentValues = ZenSQLContentValues.getSeatingContentValues(seating);
                 long newSeatingId = sqLiteDatabase.insert(ZenSQLContract.Seating.TABLE_NAME, null, contentValues);
                 if (newSeatingId != -1l) {
-                    callback.success(newSeatingId);
-                } else {
-                    callback.failed();
+                    return newSeatingId;
                 }
+                return null;
             }
         });
     }
 
     @Override
     public void bookFlightAsync(final long flightNumber, final long customerId, final Callback<Billing> callback) {
-        getWritableDatabaseAsync(new GetDBCallback() {
+        getWritableDatabaseAsync(new GetDBCallback<Billing>(callback) {
             @Override
-            public void onObtainedSQLiteDatabase(SQLiteDatabase sqLiteDatabase) {
+            public Billing doInBackground(SQLiteDatabase sqLiteDatabase) {
                 // get largest ticket number
                 Cursor cursor = sqLiteDatabase.rawQuery("SELECT MAX(" + ZenSQLContract.Billing.TICKET_NUMBER + ")" +
                         " FROM " + ZenSQLContract.Billing.TABLE_NAME, null);
                 if (!cursor.moveToFirst()) {
-                    callback.failed();
-                    return;
+                    return null;
                 }
 
                 // create new billing
@@ -127,8 +125,7 @@ public class ZenSQLImpl extends SQLiteOpenHelper implements ZenSQL {
                 ContentValues contentValues = ZenSQLContentValues.getBillingContentValues(tempBilling);
                 long newTransactionId = sqLiteDatabase.insert(ZenSQLContract.Billing.TABLE_NAME, null, contentValues);
                 if (newTransactionId == -1l) {
-                    callback.failed();
-                    return;
+                    return null;
                 }
 
                 // retrieve the newly created billing
@@ -138,48 +135,62 @@ public class ZenSQLImpl extends SQLiteOpenHelper implements ZenSQL {
                         null, null, null);
 
                 if (cursor.moveToFirst()) {
-                    callback.success(ZenSQLContentValues.getBilling(cursor));
-                } else {
-                    callback.failed();
+                    return ZenSQLContentValues.getBilling(cursor);
                 }
+                return null;
             }
         });
     }
 
     @Override
-    public void selectCustomerAsync(final String ssnOrEmail,
-                                    final Callback<Customer> callback) {
-        getReadableDatabaseAsync(new GetDBCallback() {
+    public void selectCustomerAsync(final String ssnOrEmail, final Callback<Customer> callback) {
+        getReadableDatabaseAsync(new GetDBCallback<Customer>(callback) {
             @Override
-            public void onObtainedSQLiteDatabase(SQLiteDatabase sqLiteDatabase) {
+            public Customer doInBackground(SQLiteDatabase sqLiteDatabase) {
                 Cursor cursor = sqLiteDatabase.query(ZenSQLContract.Customer.TABLE_NAME, null,
                         ZenSQLContract.Customer.SSN + " = ? OR " +
                                 ZenSQLContract.Customer.EMAIL + " = ? COLLATE NOCASE",
                         new String[]{ssnOrEmail, ssnOrEmail},
                         null, null, null);
                 if (cursor.moveToFirst()) {
-                    callback.success(ZenSQLContentValues.getCustomer(cursor));
-                } else {
-                    callback.failed();
+                    return ZenSQLContentValues.getCustomer(cursor);
                 }
+                return null;
+            }
+        });
+    }
+
+    @Override
+    public void selectEmployeeAsync(final String ssnOrEmail, final Callback<Employee> callback) {
+        getReadableDatabaseAsync(new GetDBCallback<Employee>(callback) {
+            @Override
+            public Employee doInBackground(SQLiteDatabase sqLiteDatabase) {
+                Cursor cursor = sqLiteDatabase.query(ZenSQLContract.Employee.TABLE_NAME, null,
+                        ZenSQLContract.Employee.SSN + " = ? OR " +
+                                ZenSQLContract.Employee.EMAIL + " = ? COLLATE NOCASE",
+                        new String[]{ssnOrEmail, ssnOrEmail},
+                        null, null, null);
+                if (cursor.moveToFirst()) {
+                    return ZenSQLContentValues.getEmployee(cursor);
+                }
+                return null;
             }
         });
     }
 
     @Override
     public void selectAircraft(final String flightNumber, final Callback<Aircraft> callback) {
-        getReadableDatabaseAsync(new GetDBCallback() {
+        getReadableDatabaseAsync(new GetDBCallback<Aircraft>(callback) {
             @Override
-            public void onObtainedSQLiteDatabase(SQLiteDatabase sqLiteDatabase) {
+            public Aircraft doInBackground(SQLiteDatabase sqLiteDatabase) {
                 Cursor cursor = sqLiteDatabase.query(ZenSQLContract.Aircraft.TABLE_NAME, null,
                         ZenSQLContract.Aircraft.FLIGHT_NUMBER + " = ?",
                         new String[]{flightNumber},
                         null, null, null);
                 if (cursor.moveToFirst()) {
-                    callback.success(ZenSQLContentValues.getAircraft(cursor));
-                } else {
-                    callback.failed();
+                    return ZenSQLContentValues.getAircraft(cursor);
                 }
+                return null;
             }
         });
     }
@@ -189,9 +200,9 @@ public class ZenSQLImpl extends SQLiteOpenHelper implements ZenSQL {
                                   final String departureTime, final String arrivalCity,
                                   final String arrivalState, final String arrivalTime,
                                   final Callback<FlightDescription> callback) {
-        getReadableDatabaseAsync(new GetDBCallback() {
+        getReadableDatabaseAsync(new GetDBCallback<FlightDescription>(callback) {
             @Override
-            public void onObtainedSQLiteDatabase(SQLiteDatabase sqLiteDatabase) {
+            public FlightDescription doInBackground(SQLiteDatabase sqLiteDatabase) {
                 Cursor cursor = sqLiteDatabase.query(ZenSQLContract.FlightDescription.TABLE_NAME, null,
                         ZenSQLContract.FlightDescription.DEPARTURE_CITY + " = ? AND " +
                                 ZenSQLContract.FlightDescription.DEPARTURE_STATE + " = ? AND " +
@@ -205,65 +216,79 @@ public class ZenSQLImpl extends SQLiteOpenHelper implements ZenSQL {
                         },
                         null, null, null);
                 if (cursor.moveToFirst()) {
-                    callback.success(ZenSQLContentValues.getFlightDescription(cursor));
-                } else {
-                    callback.failed();
+                    return ZenSQLContentValues.getFlightDescription(cursor);
                 }
+                return null;
             }
         });
     }
 
     @Override
     public void selectFlightAsync(final String flightNumber, final Callback<FlightDescription> callback) {
-        getReadableDatabaseAsync(new GetDBCallback() {
+        getReadableDatabaseAsync(new GetDBCallback<FlightDescription>(callback) {
             @Override
-            public void onObtainedSQLiteDatabase(SQLiteDatabase sqLiteDatabase) {
+            public FlightDescription doInBackground(SQLiteDatabase sqLiteDatabase) {
                 Cursor cursor = sqLiteDatabase.query(ZenSQLContract.FlightDescription.TABLE_NAME, null,
                         ZenSQLContract.FlightDescription.FLIGHT_NUMBER + " = ?",
                         new String[]{flightNumber},
                         null, null, null);
                 if (cursor.moveToFirst()) {
-                    callback.success(ZenSQLContentValues.getFlightDescription(cursor));
-                } else {
-                    callback.failed();
+                    return ZenSQLContentValues.getFlightDescription(cursor);
                 }
+                return null;
             }
         });
     }
 
-    private void getWritableDatabaseAsync(final GetDBCallback getDBCallback) {
-        new AsyncTask<Void, Void, SQLiteDatabase>() {
+    private <C> void getWritableDatabaseAsync(final GetDBCallback<C> getDBCallback) {
+        new AsyncTask<Void, Void, C>() {
 
             @Override
-            protected SQLiteDatabase doInBackground(Void... params) {
-                return getWritableDatabase();
+            protected C doInBackground(Void... params) {
+                return getDBCallback.doInBackground(getWritableDatabase());
             }
 
             @Override
-            protected void onPostExecute(SQLiteDatabase sqLiteDatabase) {
-                getDBCallback.onObtainedSQLiteDatabase(sqLiteDatabase);
-            }
-        }.execute();
-    }
-
-    private void getReadableDatabaseAsync(final GetDBCallback getDBCallback) {
-        new AsyncTask<Void, Void, SQLiteDatabase>() {
-
-            @Override
-            protected SQLiteDatabase doInBackground(Void... params) {
-                return getReadableDatabase();
-            }
-
-            @Override
-            protected void onPostExecute(SQLiteDatabase sqLiteDatabase) {
-                getDBCallback.onObtainedSQLiteDatabase(sqLiteDatabase);
+            protected void onPostExecute(C c) {
+                super.onPostExecute(c);
+                getDBCallback.onPostExecute(c);
             }
         }.execute();
     }
 
-    private interface GetDBCallback {
+    private <C> void getReadableDatabaseAsync(final GetDBCallback<C> getDBCallback) {
+        new AsyncTask<Void, Void, C>() {
 
-        void onObtainedSQLiteDatabase(SQLiteDatabase sqLiteDatabase);
+            @Override
+            protected C doInBackground(Void... params) {
+                return getDBCallback.doInBackground(getReadableDatabase());
+            }
+
+            @Override
+            protected void onPostExecute(C c) {
+                super.onPostExecute(c);
+                getDBCallback.onPostExecute(c);
+            }
+        }.execute();
+    }
+
+    private static abstract class GetDBCallback<C> {
+
+        private final Callback<C> callback;
+
+        private GetDBCallback(Callback callback) {
+            this.callback = callback;
+        }
+
+        protected abstract C doInBackground(SQLiteDatabase sqLiteDatabase);
+
+        protected void onPostExecute(C result) {
+            if (result != null) {
+                callback.success(result);
+            } else {
+                callback.failed();
+            }
+        }
 
     }
 

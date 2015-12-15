@@ -6,6 +6,7 @@ import android.database.Cursor;
 import com.srgiovine.zenairlines.model.Aircraft;
 import com.srgiovine.zenairlines.model.Billing;
 import com.srgiovine.zenairlines.model.Customer;
+import com.srgiovine.zenairlines.model.Employee;
 import com.srgiovine.zenairlines.model.FlightDescription;
 import com.srgiovine.zenairlines.model.Seating;
 
@@ -27,6 +28,22 @@ final class ZenSQLContentValues {
                 .setState(cursor.getString(cursor.getColumnIndexOrThrow(ZenSQLContract.Customer.STATE)))
                 .setZip(cursor.getString(cursor.getColumnIndexOrThrow(ZenSQLContract.Customer.ZIP)))
                 .createCustomer();
+    }
+
+    static Employee getEmployee(Cursor cursor) {
+        return new Employee.Builder()
+                .setId(cursor.getLong(cursor.getColumnIndexOrThrow(ZenSQLContract.Employee.EMPLOYEE_ID)))
+                .setFirstName(cursor.getString(cursor.getColumnIndexOrThrow(ZenSQLContract.Employee.FIRST_NAME)))
+                .setLastName(cursor.getString(cursor.getColumnIndexOrThrow(ZenSQLContract.Employee.LAST_NAME)))
+                .setSsn(cursor.getString(cursor.getColumnIndexOrThrow(ZenSQLContract.Employee.SSN)))
+                .setSsn(cursor.getString(cursor.getColumnIndexOrThrow(ZenSQLContract.Employee.JOB_DESCRIPTION)))
+                .setPhoneNumber(cursor.getString(cursor.getColumnIndexOrThrow(ZenSQLContract.Employee.PHONE_NUMBER)))
+                .setEmail(cursor.getString(cursor.getColumnIndexOrThrow(ZenSQLContract.Employee.EMAIL)))
+                .setAddress(cursor.getString(cursor.getColumnIndexOrThrow(ZenSQLContract.Employee.ADDRESS)))
+                .setCity(cursor.getString(cursor.getColumnIndexOrThrow(ZenSQLContract.Employee.CITY)))
+                .setState(cursor.getString(cursor.getColumnIndexOrThrow(ZenSQLContract.Employee.STATE)))
+                .setZip(cursor.getString(cursor.getColumnIndexOrThrow(ZenSQLContract.Employee.ZIP)))
+                .createEmployee();
     }
 
     static Aircraft getAircraft(Cursor cursor) {
